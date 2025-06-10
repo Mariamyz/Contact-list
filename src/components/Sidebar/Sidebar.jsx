@@ -1,3 +1,6 @@
+import './Sidebar.scss';
+
+
 export default function Sidebar({stor}) {
 
     const totalContacts = stor.length
@@ -18,38 +21,41 @@ export default function Sidebar({stor}) {
     
   
     return(
-        <aside className="container border-end">
-          <div className="row">
-            <div className="col-12">
-              <div className="contacts-labels">
-                <div className="fs-3 mb-5 mt-4 d-flex justify-content-between">
-                  <span>All contacts:</span><span>{totalContacts}</span>
-                </div>
-                <div className="list fs-5">
-                  <div className="d-flex justify-content-between mb-3">
-                    <div className="bg-success">Work</div>
-                    <span>{statusCounts.work}</span>
-                  </div>
-                  <div className="d-flex justify-content-between mb-3">
-                    <div className="bg-warning">Family</div>
-                    <span>{statusCounts.family}</span>
-                  </div>
-                  <div className="d-flex justify-content-between mb-3">
-                    <div className="bg-info">Friends</div>
-                    <span>{statusCounts.friends}</span>
-                  </div>
-                  <div className="d-flex justify-content-between mb-3">
-                    <div className="bg-primary">Private</div>
-                    <span>{statusCounts.private}</span>
-                  </div>
-                  <div className="d-flex justify-content-between mb-3">
-                    <div className="bg-secondary">Others</div>
-                    <span>{statusCounts.others}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <aside className="sidebar-container">
+      <div className="contacts-labels">
+        <div className="sidebar-header">
+          <span>All contacts:</span>
+          <span>{totalContacts}</span>
+        </div>
+    
+        <div className="contact-status-list">
+          <div className="contact-status-item">
+            <span className="status-badge status-work">Work</span>
+            <span>{statusCounts.work}</span>
           </div>
-        </aside>
+    
+          <div className="contact-status-item">
+            <span className="status-badge status-family">Family</span>
+            <span>{statusCounts.family}</span>
+          </div>
+    
+          <div className="contact-status-item">
+            <span className="status-badge status-friends">Friends</span>
+            <span>{statusCounts.friends}</span>
+          </div>
+    
+          <div className="contact-status-item">
+            <span className="status-badge status-private">Private</span>
+            <span>{statusCounts.private}</span>
+          </div>
+    
+          <div className="contact-status-item">
+            <span className="status-badge status-others">Others</span>
+            <span>{statusCounts.others}</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
     )
   }

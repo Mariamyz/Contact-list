@@ -1,0 +1,75 @@
+.sidebar-container {
+    background: linear-gradient(180deg, #eaffd0, #ffffff);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 35px; 
+  }
+  
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .sidebar-header span:first-child {
+    color: #2e7d32; 
+  }
+  
+  .contact-status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .contact-status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .status-badge:hover {
+    transform: scale(1.05);
+  }
+  
+  .status-work {
+    background-color: #c8e6c9; 
+    color: #2e7d32;
+  }
+  
+  .status-family {
+    background-color: #ffecb3; 
+    color: #f57f17;
+  }
+  
+  .status-friends {
+    background-color: #b3e5fc; 
+    color: #0288d1;
+  }
+  
+  .status-private {
+    background-color: #c5cae9; 
+    color: #303f9f;
+  }
+  
+  .status-others {
+    background-color: #e0e0e0; 
+    color: #424242;
+  }
+  
