@@ -1,0 +1,89 @@
+
+.contact-wrapper {
+    background: linear-gradient(180deg, #eaffd0, #ffffff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 30px 30px;  
+  }
+  
+  
+  .add-form {
+    background: #fefefe;
+    padding: 50px 40px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    width: 900px;           
+    max-width: 95%;
+    transition: 0.3s ease;
+  }
+  
+  .add-form h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 32px;
+    color: #19722b;
+  }
+  
+  .grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #aaff77;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .phone-field {
+    position: relative;
+  }
+  
+  .phone-icon {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    color: #444;
+    font-size: 18px;
+  }
+  
+  .phone-field input {
+    padding-left: 36px;
+  }
+  
+  .favorite-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .submit-btn {
+    margin-top: 30px;
+    width: 100%;
+    background-color: #b5ff4a;
+    border: none;
+    padding: 14px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #a6ef3d;
+  }
+  

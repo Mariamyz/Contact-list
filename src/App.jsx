@@ -9,7 +9,7 @@ import EditContact from './pages/EditContact/EditContact'
 import NotFound from './pages/NotFound/NotFound'
 import Header from './components/Header/Header'
 
-import UpdateContact from './pages/UpdateContact/UpdateContact';
+
 
 
 function App() {
@@ -136,7 +136,13 @@ function App() {
     setStor(prevStor => prevStor.filter(contact => contact.id !== id))
   }
 
-
+  const handleEditContact = (updatedContact) => {
+    setStor(prevStor =>
+      prevStor.map(contact =>
+        contact.id === updatedContact.id ? updatedContact : contact
+      )
+    );
+  };
 
   return (
     <Router>
@@ -145,8 +151,7 @@ function App() {
       <Routes>
        <Route path='/' element={<ContactList stor={stor} deleteContact={deleteContact} />} />
        <Route path='/add-contact' element={<AddContact addNewContact={handleNewContact} />} />
-       <Route path='/edit-contact' element={<EditContact />} />
-       <Route path='/update-contact/:id' element={<UpdateContact />} />
+       <Route path='/update-contact/:id' element={<EditContact stor={stor} editContact={handleEditContact} />} />
        <Route path='*' element={<NotFound />} />
     </Routes>
 
@@ -155,5 +160,6 @@ function App() {
   )
   
 }
+
 
 export default App

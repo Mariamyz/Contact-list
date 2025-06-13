@@ -1,85 +1,110 @@
-import './EditContact.scss'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import {contactValidationSchema} from '../../validation/validation'
+import './EditContact.scss';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { contactValidationSchema } from '../../validation/validation';
 import { useNavigate } from "react-router";
 import { useParams } from "react-router";
+import { BsHeart, BsHeartFill } from 'react-icons/bs';
 
-export default function EditContact({stor, editContact}) {
-    const {id} = useParams()
-    const navigate = useNavigate();
+export default function EditContact({ stor, editContact }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-    const contact = stor.contacts.find(contact => contact.id === id)
-    
-    const initialValues = {...contact}
+  const contact = stor.find(contact => contact.id === id);
 
-    const handleSubmin = (values) => {
-        editContact(values)
-        navigate('/')
-    }
+  if (!contact) {
+    return <h2 className="text-center mt-5 text-danger">Contact not found</h2>;
+  }
 
-    return( 
-        <div className="container">
-            <div className="modal-content addPage rounded shadow">
-                <Formik initialValues={initialValues} validationSchema={contactValidationSchema} onSubmit={handleSubmin}>
-                    {({isSubmitting}) => (
-                      <Form>
-                            <h1 className='text-center'>Edit contact</h1>
-                            <hr />
-                            <div className='mb-4'>
-                                <label htmlFor="firstName">First name</label>
-                                <Field className='form-control fs-5' type='text' name='firstName' id='firstName'/>
-                                <ErrorMessage name='firstName' component='p' className='text-danger position-absolute'/>
-                            </div>
-                            <div className='mb-4'>
-                                <label htmlFor="lastName">Last name</label>
-                                <Field className='form-control fs-5' type='text' name='lastName' id='lastName'/>
-                                <ErrorMessage name='lastName' component='p' className='text-danger position-absolute'/>
-                            </div>
-                            <div className='mb-4'>
-                                <label htmlFor="phone">Phone</label>
-                                <Field className='form-control fs-5' type='text' name='phone' id='phone'/>
-                                <ErrorMessage name='phone' component='p' className='text-danger position-absolute'/>
-                            </div>
-                            <div className='mb-4'> 
-                                <label htmlFor="email">Email</label>
-                                <Field className='form-control fs-5' type='email' name='email' id='email'/>
-                                <ErrorMessage name='email' component='p' className='text-danger position-absolute'/>
-                            </div>
-                            <div className='mb-4'>
-                                <label htmlFor="avatar">Avatar</label>
-                                <Field className='form-control fs-5' type='number' max={99} min={0} name='avatar' id='avatar'/>
-                                <ErrorMessage name='avatar' component='p' className='text-danger position-absolute'/>
-                            </div>
-                            <div className='mb-4'>
-                                <label htmlFor="gender">Gender</label>
-                                <Field className='form-control fs-5' as='select' name='gender'>
-                                    <option value="">Choose gender</option>
-                                    <option value="men">Men</option>
-                                    <option value="women">Women</option>
-                                </Field>
-                                <ErrorMessage name='gender' component='p' className='text-danger position-absolute'/>
-                            </div>
-                            <div className='mb-4'>
-                                <label htmlFor="status">Status</label>
-                                <Field className='form-control fs-5' as='select' name='status'>
-                                    <option value="">Choose status</option>
-                                    <option value="work">Work</option>
-                                    <option value="family">Family</option>
-                                    <option value="friends">Friends</option>
-                                    <option value="private">Private</option>
-                                    <option value="others">Others</option>
-                                </Field>
-                                <ErrorMessage name='status' component='p' className='text-danger position-absolute'/>
-                            </div>
-                            <div className='mb-4'>
-                                <label className='form-check-label fs-5' htmlFor="favorite">Favorite</label>
-                                <Field className='form-check-input m-1 fs-4' type='checkbox' name='favorite'/>
-                            </div>
-                            <button type='submit' className='btn btn-primary btn-lg form-control' disabled={isSubmitting}>Save</button>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
-        </div>
-    )
+  const initialValues = { ...contact };
+
+  const handleSubmit = (values) => {
+    editContact(values);
+    navigate('/');
+  };
+
+  return (
+    <div className="contact-wrapper">
+      <div className="add-form">
+        <h2>Edit contact</h2>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={contactValidationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting, setFieldValue, values }) => (
+
+            <Form>
+              <div className="grid-two">
+                <div>
+                  <label>First Name</label>
+                  <Field name="firstName" className="form-control" placeholder="Enter first name" />
+                  <ErrorMessage name="firstName" component="div" className="error" />
+                </div>
+                <div>
+                  <label>Last Name</label>
+                  <Field name="lastName" className="form-control" placeholder="Enter last name" />
+                  <ErrorMessage name="lastName" component="div" className="error" />
+                </div>
+
+                <div>
+                  <label>Phone</label>
+                  <Field name="phone" className="form-control" placeholder="+38 (0XX) XXX-XX-XX" />
+                  <ErrorMessage name="phone" component="div" className="error" />
+                </div>
+
+                <div>
+                  <label>Email</label>
+                  <Field name="email" className="form-control" placeholder="Enter email" />
+                  <ErrorMessage name="email" component="div" className="error" />
+                </div>
+
+                <div>
+                  <label>Avatar</label>
+                  <Field name="avatar" className="form-control" placeholder=" " type="number" />
+                  <ErrorMessage name="avatar" component="div" className="error" />
+                </div>
+
+                <div>
+                  <label>Gender</label>
+                  <Field name="gender" as="select" className="form-control">
+                    <option value="">Choose gender</option>
+                    <option value="men">Men</option>
+                    <option value="women">Women</option>
+                  </Field>
+                  <ErrorMessage name="gender" component="div" className="error" />
+                </div>
+
+                <div>
+                  <label>Status</label>
+                  <Field name="status" as="select" className="form-control">
+                    <option value="">Choose status</option>
+                    <option value="work">Work</option>
+                    <option value="family">Family</option>
+                    <option value="friends">Friends</option>
+                    <option value="private">Private</option>
+                    <option value="others">Others</option>
+                  </Field>
+                  <ErrorMessage name="status" component="div" className="error" />
+                </div>
+
+                <div className="favorite-row">
+                  <label>Favorite</label>
+                  <span
+                    onClick={() => setFieldValue('favorite', !values.favorite)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {values.favorite ? <BsHeartFill size={20} color="red" /> : <BsHeart size={20} />}
+                  </span>
+                </div>
+              </div>
+
+              <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                Save
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </div>
+  );
 }
