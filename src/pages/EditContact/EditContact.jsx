@@ -1,15 +1,19 @@
 import './EditContact.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { contactValidationSchema } from '../../validation/validation';
-import { useNavigate } from "react-router";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
+import { useSelector, useDispatch } from 'react-redux';
+import { editContact } from '../../redux/actions';
 
-export default function EditContact({ stor, editContact }) {
+export default function EditContact() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const contact = stor.find(contact => contact.id === id);
+  const contact = useSelector(state =>
+    state.contacts.find(contact => contact.id === id)
+  );
 
   if (!contact) {
     return <h2 className="text-center mt-5 text-danger">Contact not found</h2>;
@@ -18,9 +22,10 @@ export default function EditContact({ stor, editContact }) {
   const initialValues = { ...contact };
 
   const handleSubmit = (values) => {
-    editContact(values);
+    dispatch(editContact(values.id, values));
     navigate('/');
   };
+  
 
   return (
     <div className="contact-wrapper">
@@ -60,7 +65,7 @@ export default function EditContact({ stor, editContact }) {
 
                 <div>
                   <label>Avatar</label>
-                  <Field name="avatar" className="form-control" placeholder=" " type="number" />
+                  <Field name="avatar" className="form-control" type="number" />
                   <ErrorMessage name="avatar" component="div" className="error" />
                 </div>
 

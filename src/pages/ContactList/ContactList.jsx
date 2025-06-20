@@ -1,18 +1,31 @@
-import ContactItem from "../../components/ContactItem/ContactItem"
-import Sidebar from "../../components/Sidebar/Sidebar"
+import { useSelector } from 'react-redux';
+import ContactItem from "../../components/ContactItem/ContactItem";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
+export default function ContactList() {
+  const contacts = useSelector(state => state.contacts);
+  const searchTerm = useSelector(state => state.search).toLowerCase();
 
-export default function ContactList({ stor, deleteContact }) {
-    return(
-        <div className="container rounded bg-white shadow-lg">
-            <div className="row">
-                <div className="col-3">
-                    <Sidebar stor={stor}/>
-                </div>
-                <div className="col-9">
-                    <ContactItem stor={stor} deleteContact={deleteContact}/>
-                </div>
-            </div>
+  const filtered = searchTerm
+    ? contacts.filter(contact => {
+        const term = searchTerm.toLowerCase();
+        return (
+          contact.firstName.toLowerCase().startsWith(term) ||
+          contact.lastName.toLowerCase().startsWith(term)
+        );
+      })
+    : contacts;
+
+  return (
+    <div className="container rounded bg-white shadow-lg">
+      <div className="row">
+        <div className="col-3">
+          <Sidebar stor={filtered} />
         </div>
-    )
+        <div className="col-9">
+          <ContactItem stor={filtered} />
+        </div>
+      </div>
+    </div>
+  );
 }
