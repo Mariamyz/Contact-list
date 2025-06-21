@@ -2,9 +2,11 @@ import { BsPencilSquare, BsTrash, BsHeartFill, BsHeart } from 'react-icons/bs';
 import { FiPhone, FiMail, FiTag } from 'react-icons/fi';
 import { FaMale, FaFemale } from 'react-icons/fa';
 import './ContactItem.scss';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import DeleteModal from '../DeleteModal/DeleteModal';
 import ContactDetailsModal from '../../pages/ContactDetailsModal/ContactDetailsModal';
 import { deleteContact } from '../../redux/actions';
@@ -12,19 +14,22 @@ import { deleteContact } from '../../redux/actions';
 export default function ContactItem() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const contacts = useSelector(state => state.contacts);
-  const searchTerm = useSelector(state => state.search);
+  const searchTerm = useSelector(state => state.search).toLowerCase();
+  const filterStatus = useSelector(state => state.filterStatus);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
 
-  const filteredContacts = searchTerm
-    ? contacts.filter(contact =>
-        contact.firstName.toLowerCase().startsWith(searchTerm) ||
-        contact.lastName.toLowerCase().startsWith(searchTerm)
-      )
-    : contacts;
+  const filteredContacts = contacts.filter(contact => {
+    const matchSearch =
+      contact.firstName.toLowerCase().startsWith(searchTerm) ||
+      contact.lastName.toLowerCase().startsWith(searchTerm);
+    const matchStatus = filterStatus ? contact.status === filterStatus : true;
+    return matchSearch && matchStatus;
+  });
 
   return (
     <>
@@ -40,31 +45,32 @@ export default function ContactItem() {
           >
             <img
               className="contact-avatar"
-              src={`https://randomuser.me/api/portraits/${contact.gender.toLowerCase()}/${contact.avatar}.jpg`}
+              src={`https://randomuser.me/api/portraits/${contact.gender === 'men' ? 'men' : 'women'}/${contact.avatar}.jpg`}
               alt={`${contact.firstName} ${contact.lastName}`}
             />
+
             <div className="contact-info">
               <h3 className="contact-name">
                 {contact.firstName} {contact.lastName}
               </h3>
-              <p><FiPhone style={{ marginRight: '6px' }} />{contact.phone}</p>
-              <p><FiMail style={{ marginRight: '6px' }} />{contact.email}</p>
-              <p><FiTag style={{ marginRight: '6px' }} />
+              <p><FiPhone /> {contact.phone}</p>
+              <p><FiMail /> {contact.email}</p>
+              <p>
+                <FiTag />{' '}
                 <span className={`status-badge status-${contact.status}`}>
                   {contact.status.toUpperCase()}
                 </span>
               </p>
               <p>
-                {contact.gender.toLowerCase() === 'men' ? (
-                  <FaMale color="#2e7d32" size={20} style={{ marginRight: '6px' }} />
+                {contact.gender === 'men' ? (
+                  <FaMale color="#2e7d32" size={20} />
                 ) : (
-                  <FaFemale color="#d81b60" size={20} style={{ marginRight: '6px' }} />
-                )}
+                  <FaFemale color="#d81b60" size={20} />
+                )}{' '}
                 <b>{contact.gender.toUpperCase()}</b>
               </p>
               <p>
-                Favorite:{' '}
-                {contact.favorite ? <BsHeartFill color="red" /> : <BsHeart />}
+                Favorite: {contact.favorite ? <BsHeartFill color="red" /> : <BsHeart />}
               </p>
             </div>
 

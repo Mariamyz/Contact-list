@@ -126,6 +126,7 @@ const intialState = {
       ]
     ,
     search: '',
+    filterStatus: '',
     contactStatuss:{
       work: {count: 0, bg: '#a5a0ff'},
       family: {count: 0, bg: '#d2a8e6'},
@@ -170,11 +171,12 @@ const reducer = (state = intialState, action) => {
             ...state,
             search: action.payload
           }
-        case SET_FILTER:
-          return{
-            ...state,
-            contactStatus: action.payload
-          }
+          case SET_FILTER:
+            return {
+              ...state,
+              filterStatus: action.payload
+            }
+          
         case ADD_NEW_STATUS:
           const newStatusName = Object.keys(action.payload)[0];
           if (state.contactStatuss[newStatusName]) {
@@ -221,6 +223,7 @@ const reducer = (state = intialState, action) => {
             contactStatuss: updatedContactStatuss,
             contacts: updatedContacts
           }
+
         default:
             return state
     }

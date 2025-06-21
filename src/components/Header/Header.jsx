@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { search } from "../../redux/actions"; 
+import { search } from "../../redux/actions";
+import './Header.scss';
 
 export default function Header() {
   const searchTerm = useSelector(state => state.search);
@@ -12,14 +13,21 @@ export default function Header() {
         <div className="col-12">
           <nav className="navbar bg-body-tertiary">
             <div className="container-fluid">
-              <div className="navbar-brand">
-                <Link className="navbar-brand" to="/">
-                  Contact List
-                </Link>
-                <Link className="navbar-brand" to="/add-contact">
-                  Add Contact
-                </Link>
-              </div>
+             <div className="d-flex align-items-center">
+             <NavLink
+               to="/"
+               className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+             >
+                 Contact List
+             </NavLink>
+
+             <NavLink
+               to="/add-contact"
+               className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+             >
+                 Add Contact
+              </NavLink>
+             </div>
 
               <form className="d-flex" role="search" onSubmit={(e) => e.preventDefault()}>
                 <input
@@ -27,7 +35,7 @@ export default function Header() {
                   type="search"
                   placeholder="Search"
                   value={searchTerm}
-                  onChange={(e) => dispatch(search(e.target.value))} 
+                  onChange={(e) => dispatch(search(e.target.value))}
                 />
               </form>
             </div>
