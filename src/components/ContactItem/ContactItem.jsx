@@ -1,6 +1,8 @@
 import { BsPencilSquare, BsTrash, BsHeartFill, BsHeart } from 'react-icons/bs';
 import { FiPhone, FiMail, FiTag } from 'react-icons/fi';
 import { FaMale, FaFemale } from 'react-icons/fa';
+
+import { toggleFavorite } from '../../redux/actions';
 import './ContactItem.scss';
 
 import { useState } from 'react';
@@ -24,12 +26,17 @@ export default function ContactItem() {
   const [selectedContact, setSelectedContact] = useState(null);
 
   const filteredContacts = contacts.filter(contact => {
-    const matchSearch =
-      contact.firstName.toLowerCase().startsWith(searchTerm) ||
-      contact.lastName.toLowerCase().startsWith(searchTerm);
-    const matchStatus = filterStatus ? contact.status === filterStatus : true;
-    return matchSearch && matchStatus;
+    const matchesSearch = searchTerm
+      ? `${contact.firstName} ${contact.lastName} ${contact.email} ${contact.phone}`
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      : true;
+  
+    const matchesStatus = filterStatus ? contact.status === filterStatus : true;
+  
+    return matchesSearch && matchesStatus;
   });
+  
 
   return (
     <>
@@ -43,11 +50,11 @@ export default function ContactItem() {
               setDetailsVisible(true);
             }}
           >
-            <img
-              className="contact-avatar"
-              src={`https://randomuser.me/api/portraits/${contact.gender === 'men' ? 'men' : 'women'}/${contact.avatar}.jpg`}
-              alt={`${contact.firstName} ${contact.lastName}`}
-            />
+           <img
+            className={`contact-avatar rounded-circle border ${contact.gender === 'men' ? 'border-primary' : 'border-danger'}`}
+            src={`https://randomuser.me/api/portraits/${contact.gender === 'men' ? 'men' : 'women'}/${contact.avatar}.jpg`}
+            alt={`${contact.firstName} ${contact.lastName}`}
+           />
 
             <div className="contact-info">
               <h3 className="contact-name">
@@ -69,9 +76,16 @@ export default function ContactItem() {
                 )}{' '}
                 <b>{contact.gender.toUpperCase()}</b>
               </p>
-              <p>
-                Favorite: {contact.favorite ? <BsHeartFill color="red" /> : <BsHeart />}
-              </p>
+              <p
+                onClick={(e) => {
+                 e.stopPropagation();
+                   dispatch(toggleFavorite(contact.id));
+                }}
+                style={{ cursor: 'pointer' }}
+>
+                  Favorite: {contact.favorite ? <BsHeartFill color="red" /> : <BsHeart />}
+               </p>
+
             </div>
 
             <div className="contact-actions">

@@ -53,12 +53,16 @@ export const toggleFavorite = (id) => {
     }
 }
 
-export const addNewStatus = (newStatus) => {
-    return{
-        type: ADD_NEW_STATUS,
-        payload: newStatus
+export const addStatus = (name, color) => ({
+    type: ADD_NEW_STATUS,
+    payload: {
+      [name.toLowerCase()]: {
+        count: 0,
+        bg: color
+      }
     }
-}
+  });
+  
 
 export const deleteStatus = (status) => {
     return{
@@ -73,3 +77,6 @@ export const editStatus = (oldStatusName, editStatusName, updatedStatus) => {
         payload: {oldStatusName, editStatusName, updatedStatus}
     }
 }
+
+
+  

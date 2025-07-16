@@ -13,21 +13,29 @@ export default function Header() {
         <div className="col-12">
           <nav className="navbar bg-body-tertiary">
             <div className="container-fluid">
-             <div className="d-flex align-items-center">
-             <NavLink
-               to="/"
-               className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-             >
-                 Contact List
-             </NavLink>
+            <div className="d-flex align-items-center">
+  <NavLink
+    to="/"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+    Contact List
+  </NavLink>
 
-             <NavLink
-               to="/add-contact"
-               className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-             >
-                 Add Contact
-              </NavLink>
-             </div>
+  <NavLink
+    to="/add-contact"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+    Add Contact
+  </NavLink>
+
+  <NavLink
+    to="/contact-statuss"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+    Status
+  </NavLink> 
+</div>
+
 
               <form className="d-flex" role="search" onSubmit={(e) => e.preventDefault()}>
                 <input

@@ -7,10 +7,11 @@ export default function ContactDetailsModal({ contact, onClose }) {
         <button className="details-close" onClick={onClose}>×</button>
         <h2 className="details-title">Contact information</h2>
         <img
-          src={`https://randomuser.me/api/portraits/${contact.gender.toLowerCase()}/${contact.avatar}.jpg`}
-          alt={contact.firstName}
-          className="details-avatar"
-        />
+           src={`https://randomuser.me/api/portraits/${contact.gender.toLowerCase()}/${contact.avatar}.jpg`}
+           alt={contact.firstName}
+           className={`details-avatar rounded-circle border ${contact.gender === 'men' ? 'border-primary' : 'border-danger'}`}
+         />
+
         <h3 className="details-name">{contact.firstName} {contact.lastName}</h3>
         <p><b>Email:</b> {contact.email}</p>
         <p><b>Phone:</b> {contact.phone}</p>
