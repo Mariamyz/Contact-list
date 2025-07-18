@@ -1,4 +1,4 @@
-// Фоновий градієнт як у формі
+
 main.container {
   background: linear-gradient(180deg, #eaffd0, #ffffff);
   padding: 20px;
@@ -6,28 +6,28 @@ main.container {
   border-radius: 10px;
 }
 
-// Таблиця
+
 .table {
   background-color: white;
   border-radius: 10px;
   overflow: hidden;
 }
 
-// Заголовки таблиці
+
 .table th {
   background-color: #f5f5f5;
   font-weight: bold;
   font-size: 1.2rem;
 }
 
-// Рядки таблиці
+
 .table td,
 .table th {
   vertical-align: middle;
   font-size: 1.1rem;
 }
 
-// Кнопка Add +
+
 .btn-success {
   background-color: #2e7d32;
   border: none;
@@ -37,7 +37,6 @@ main.container {
   background-color: #27662b;
 }
 
-// Стилі для бейджів статусів (якщо окремо десь показуєш їх)
 .status-badge {
   padding: 5px 15px;
   border-radius: 25px;
@@ -75,7 +74,7 @@ main.container {
   color: #424242;
 }
 
-// Активний статус
+
 .active-status {
   background-color: #dff0ff;
   border-radius: 50px;
@@ -101,7 +100,7 @@ main.container {
 
 .table {
   border-collapse: separate;
-  border-spacing: 0 8px; /* додає відстань між рядками */
+  border-spacing: 0 8px; 
 }
 
 .btn-edit {
@@ -142,10 +141,10 @@ main.container {
 }
 
 .table thead th {
-  color: #2e7d32; /* темно-зелений */
+  color: #2e7d32; 
 }
 
-// Статуси: кольори для назви, кольору та кількості
+
 .table tbody td.status-name-work,
 .table tbody td.status-color-work,
 .table tbody td.status-count-work {

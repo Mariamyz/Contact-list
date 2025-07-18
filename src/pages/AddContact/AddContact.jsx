@@ -5,12 +5,13 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router";
 import { IMaskInput } from "react-imask";
 import { BsHeart, BsHeartFill, BsTelephone } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/actions";
 
 export default function AddContact() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const contactStatuss = useSelector((state) => state.contactStatuss); 
 
   const initialValues = {
     id: uuidv4(),
@@ -54,6 +55,7 @@ export default function AddContact() {
                     className="error"
                   />
                 </div>
+
                 <div>
                   <label>Last Name</label>
                   <Field
@@ -140,11 +142,18 @@ export default function AddContact() {
                   <label>Status</label>
                   <Field name="status" as="select" className="form-control">
                     <option value="">Choose status</option>
-                    <option value="work">Work</option>
-                    <option value="family">Family</option>
-                    <option value="friends">Friends</option>
-                    <option value="private">Private</option>
-                    <option value="others">Others</option>
+                    {Object.entries(contactStatuss).map(([key, data]) => (
+                      <option
+                        key={key}
+                        value={key}
+                        style={{
+                          backgroundColor: data.bg,
+                          color: "#fff",
+                        }}
+                      >
+                        {key.charAt(0).toUpperCase() + key.slice(1)}
+                      </option>
+                    ))}
                   </Field>
                   <ErrorMessage
                     name="status"
