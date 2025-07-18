@@ -1,12 +1,12 @@
-import './AddContact.scss';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { contactValidationSchema } from '../../validation/validation';
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router';
-import { IMaskInput } from 'react-imask';
-import { BsHeart, BsHeartFill, BsTelephone } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/actions';
+import "./AddContact.scss";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { contactValidationSchema } from "../../validation/validation";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router";
+import { IMaskInput } from "react-imask";
+import { BsHeart, BsHeartFill, BsTelephone } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/actions";
 
 export default function AddContact() {
   const navigate = useNavigate();
@@ -14,19 +14,19 @@ export default function AddContact() {
 
   const initialValues = {
     id: uuidv4(),
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-    avatar: '',
-    gender: '',
-    status: '',
-    favorite: false
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    avatar: "",
+    gender: "",
+    status: "",
+    favorite: false,
   };
 
   const handleSubmit = (values) => {
     dispatch(addContact(values));
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -39,18 +39,33 @@ export default function AddContact() {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
-
             <Form>
               <div className="grid-two">
                 <div>
                   <label>First Name</label>
-                  <Field name="firstName" className="form-control" placeholder="Enter first name" />
-                  <ErrorMessage name="firstName" component="div" className="error" />
+                  <Field
+                    name="firstName"
+                    className="form-control"
+                    placeholder="Enter first name"
+                  />
+                  <ErrorMessage
+                    name="firstName"
+                    component="div"
+                    className="error"
+                  />
                 </div>
                 <div>
                   <label>Last Name</label>
-                  <Field name="lastName" className="form-control" placeholder="Enter last name" />
-                  <ErrorMessage name="lastName" component="div" className="error" />
+                  <Field
+                    name="lastName"
+                    className="form-control"
+                    placeholder="Enter last name"
+                  />
+                  <ErrorMessage
+                    name="lastName"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
@@ -64,24 +79,47 @@ export default function AddContact() {
                           mask="+{38} (000) 000-00-00"
                           className="form-control"
                           placeholder="+38 (0XX) XXX-XX-XX"
-                          onAccept={(value) => form.setFieldValue('phone', value)}
+                          onAccept={(value) =>
+                            form.setFieldValue("phone", value)
+                          }
                         />
                       )}
                     </Field>
                   </div>
-                  <ErrorMessage name="phone" component="div" className="error" />
+                  <ErrorMessage
+                    name="phone"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
                   <label>Email</label>
-                  <Field name="email" className="form-control" placeholder="Enter email" />
-                  <ErrorMessage name="email" component="div" className="error" />
+                  <Field
+                    name="email"
+                    className="form-control"
+                    placeholder="Enter email"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
                   <label>Avatar</label>
-                  <Field name="avatar" className="form-control" placeholder=" " type="number" />
-                  <ErrorMessage name="avatar" component="div" className="error" />
+                  <Field
+                    name="avatar"
+                    className="form-control"
+                    placeholder=" "
+                    type="number"
+                  />
+                  <ErrorMessage
+                    name="avatar"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
@@ -91,7 +129,11 @@ export default function AddContact() {
                     <option value="men">Men</option>
                     <option value="women">Women</option>
                   </Field>
-                  <ErrorMessage name="gender" component="div" className="error" />
+                  <ErrorMessage
+                    name="gender"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
@@ -104,7 +146,11 @@ export default function AddContact() {
                     <option value="private">Private</option>
                     <option value="others">Others</option>
                   </Field>
-                  <ErrorMessage name="status" component="div" className="error" />
+                  <ErrorMessage
+                    name="status"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div className="favorite-row">
@@ -112,17 +158,27 @@ export default function AddContact() {
                   <Field name="favorite" type="checkbox">
                     {({ field, form }) => (
                       <span
-                        onClick={() => form.setFieldValue('favorite', !field.value)}
-                        style={{ cursor: 'pointer' }}
+                        onClick={() =>
+                          form.setFieldValue("favorite", !field.value)
+                        }
+                        style={{ cursor: "pointer" }}
                       >
-                        {field.value ? <BsHeartFill size={20} color="red" /> : <BsHeart size={20} />}
+                        {field.value ? (
+                          <BsHeartFill size={20} color="red" />
+                        ) : (
+                          <BsHeart size={20} />
+                        )}
                       </span>
                     )}
                   </Field>
                 </div>
               </div>
 
-              <button type="submit" className="submit-btn" disabled={isSubmitting}>
+              <button
+                type="submit"
+                className="submit-btn"
+                disabled={isSubmitting}
+              >
                 Add
               </button>
             </Form>

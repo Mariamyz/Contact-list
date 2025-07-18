@@ -2,11 +2,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editStatus } from "../../redux/actions";
 import { useState, useEffect } from "react";
-import './EditContactStatus.scss';
+import "./EditContactStatus.scss";
 
 export default function EditContactStatus() {
   const { status } = useParams();
-  const contactStatuss = useSelector(state => state.contactStatuss);
+  const contactStatuss = useSelector((state) => state.contactStatuss);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,26 +29,31 @@ export default function EditContactStatus() {
 
     const updatedStatus = {
       count: currentStatus.count,
-      bg: color
+      bg: color,
     };
 
-    dispatch(editStatus(status, statusName.trim().toLowerCase(), updatedStatus));
+    dispatch(
+      editStatus(status, statusName.trim().toLowerCase(), updatedStatus),
+    );
     navigate("/contact-statuss");
   };
 
   return (
-    <div className="container">
+    <div className="d-flex justify-content-center mt-5">
       <form
         onSubmit={handleSubmit}
-        className="edit-status-container modal-content rounded shadow"
+        className="modal-content p-4 rounded shadow"
+        style={{ maxWidth: "600px", width: "100%" }}
       >
-        <h1 className="text-center">Edit contact status</h1>
+        <h2 className="text-center mb-3">Edit contact status</h2>
         <hr />
         <div className="mb-3">
-          <label htmlFor="statusName">Status name</label>
+          <label htmlFor="statusName" className="form-label">
+            Status name
+          </label>
           <input
             type="text"
-            className="form-control fs-5"
+            className="form-control"
             id="statusName"
             value={statusName}
             onChange={(e) => setStatusName(e.target.value)}
@@ -56,17 +61,20 @@ export default function EditContactStatus() {
           />
         </div>
         <div className="mb-3 d-flex align-items-center">
-          <label htmlFor="color">Color</label>
+          <label htmlFor="color" className="me-2">
+            Color
+          </label>
           <input
             type="color"
-            className="ms-3 mt-1 fs-5"
             id="color"
+            className="form-control-color"
             value={color}
             onChange={(e) => setColor(e.target.value)}
             required
           />
         </div>
-        <button type="submit" className="btn btn-warning btn-lg form-control">
+
+        <button type="submit" className="btn btn-warning w-100">
           Save
         </button>
       </form>

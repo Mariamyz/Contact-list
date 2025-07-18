@@ -13,14 +13,11 @@ export default function AddContactStatus() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Надіслати в Redux
     dispatch(addStatus(statusName.trim(), color));
-    
-    // Очистити форму (необов’язково)
+
     setStatusName("");
     setColor("#000000");
 
-    // Перекинути на список статусів
     navigate("/contact-statuss");
   };
 
@@ -36,7 +33,9 @@ export default function AddContactStatus() {
         }}
         className="modal-content rounded shadow"
       >
-        <h1 className="text-center">Add contact status</h1>
+        <h1 className="text-center" style={{ color: "#2e7d32" }}>
+          Add contact status
+        </h1>
         <hr />
         <div className="mb-3">
           <label htmlFor="statusName">Status name</label>

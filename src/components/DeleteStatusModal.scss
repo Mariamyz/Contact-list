@@ -1,4 +1,4 @@
-.details-backdrop {
+.delete-status-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,38 +11,38 @@
   z-index: 999;
 }
 
-.modal-content {
+.delete-status-modal {
   background: linear-gradient(180deg, #eaffd0, #ffffff);
-  border: 2px solid #c8e6c9;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  border: 2px solid #c8e6c9;
 }
 
-.details-title {
-  margin-bottom: 15px;
-  font-weight: 700;
+.delete-status-modal h3 {
   font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
   color: #2e7d32;
 }
 
-h2 {
-  color: #2e7d32;
-}
-
-.details-text {
-  margin-bottom: 20px;
+.delete-status-modal p {
   font-size: 16px;
   font-weight: 600;
   color: #2e7d32;
+  margin-bottom: 20px;
 }
 
-.details-buttons {
+.delete-status-buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
-.details-button-cancel {
+.delete-status-cancel {
   background-color: #ccff66;
   color: #2e7d32;
   border: none;
@@ -58,7 +58,7 @@ h2 {
   }
 }
 
-.details-button-delete {
+.delete-status-confirm {
   background-color: #f44336;
   color: white;
   border: none;

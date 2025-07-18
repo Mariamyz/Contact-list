@@ -1,18 +1,18 @@
-import './EditContact.scss';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { contactValidationSchema } from '../../validation/validation';
+import "./EditContact.scss";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { contactValidationSchema } from "../../validation/validation";
 import { useNavigate, useParams } from "react-router";
-import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import { useSelector, useDispatch } from 'react-redux';
-import { editContact } from '../../redux/actions';
+import { BsHeart, BsHeartFill } from "react-icons/bs";
+import { useSelector, useDispatch } from "react-redux";
+import { editContact } from "../../redux/actions";
 
 export default function EditContact() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const contact = useSelector(state =>
-    state.contacts.find(contact => contact.id === id)
+  const contact = useSelector((state) =>
+    state.contacts.find((contact) => contact.id === id),
   );
 
   if (!contact) {
@@ -23,9 +23,8 @@ export default function EditContact() {
 
   const handleSubmit = (values) => {
     dispatch(editContact(values.id, values));
-    navigate('/');
+    navigate("/");
   };
-  
 
   return (
     <div className="contact-wrapper">
@@ -37,36 +36,71 @@ export default function EditContact() {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue, values }) => (
-
             <Form>
               <div className="grid-two">
                 <div>
                   <label>First Name</label>
-                  <Field name="firstName" className="form-control" placeholder="Enter first name" />
-                  <ErrorMessage name="firstName" component="div" className="error" />
+                  <Field
+                    name="firstName"
+                    className="form-control"
+                    placeholder="Enter first name"
+                  />
+                  <ErrorMessage
+                    name="firstName"
+                    component="div"
+                    className="error"
+                  />
                 </div>
                 <div>
                   <label>Last Name</label>
-                  <Field name="lastName" className="form-control" placeholder="Enter last name" />
-                  <ErrorMessage name="lastName" component="div" className="error" />
+                  <Field
+                    name="lastName"
+                    className="form-control"
+                    placeholder="Enter last name"
+                  />
+                  <ErrorMessage
+                    name="lastName"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
                   <label>Phone</label>
-                  <Field name="phone" className="form-control" placeholder="+38 (0XX) XXX-XX-XX" />
-                  <ErrorMessage name="phone" component="div" className="error" />
+                  <Field
+                    name="phone"
+                    className="form-control"
+                    placeholder="+38 (0XX) XXX-XX-XX"
+                  />
+                  <ErrorMessage
+                    name="phone"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
                   <label>Email</label>
-                  <Field name="email" className="form-control" placeholder="Enter email" />
-                  <ErrorMessage name="email" component="div" className="error" />
+                  <Field
+                    name="email"
+                    className="form-control"
+                    placeholder="Enter email"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
                   <label>Avatar</label>
                   <Field name="avatar" className="form-control" type="number" />
-                  <ErrorMessage name="avatar" component="div" className="error" />
+                  <ErrorMessage
+                    name="avatar"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
@@ -76,7 +110,11 @@ export default function EditContact() {
                     <option value="men">Men</option>
                     <option value="women">Women</option>
                   </Field>
-                  <ErrorMessage name="gender" component="div" className="error" />
+                  <ErrorMessage
+                    name="gender"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div>
@@ -89,21 +127,33 @@ export default function EditContact() {
                     <option value="private">Private</option>
                     <option value="others">Others</option>
                   </Field>
-                  <ErrorMessage name="status" component="div" className="error" />
+                  <ErrorMessage
+                    name="status"
+                    component="div"
+                    className="error"
+                  />
                 </div>
 
                 <div className="favorite-row">
                   <label>Favorite</label>
                   <span
-                    onClick={() => setFieldValue('favorite', !values.favorite)}
-                    style={{ cursor: 'pointer' }}
+                    onClick={() => setFieldValue("favorite", !values.favorite)}
+                    style={{ cursor: "pointer" }}
                   >
-                    {values.favorite ? <BsHeartFill size={20} color="red" /> : <BsHeart size={20} />}
+                    {values.favorite ? (
+                      <BsHeartFill size={20} color="red" />
+                    ) : (
+                      <BsHeart size={20} />
+                    )}
                   </span>
                 </div>
               </div>
 
-              <button type="submit" className="submit-btn" disabled={isSubmitting}>
+              <button
+                type="submit"
+                className="submit-btn"
+                disabled={isSubmitting}
+              >
                 Save
               </button>
             </Form>

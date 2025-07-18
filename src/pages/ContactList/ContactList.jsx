@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import ContactItem from "../../components/ContactItem/ContactItem";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 export default function ContactList() {
-  const contacts = useSelector(state => state.contacts);
-  const searchTerm = useSelector(state => state.search).toLowerCase();
-  const filterStatus = useSelector(state => state.filterStatus);
+  const contacts = useSelector((state) => state.contacts);
+  const searchTerm = useSelector((state) => state.search).toLowerCase();
+  const filterStatus = useSelector((state) => state.filterStatus);
 
-  const filtered = contacts.filter(contact => {
+  const filtered = contacts.filter((contact) => {
     const matchesSearch =
       contact.firstName.toLowerCase().startsWith(searchTerm) ||
       contact.lastName.toLowerCase().startsWith(searchTerm);
