@@ -1,17 +1,18 @@
 import { BsPencilSquare, BsTrash, BsHeartFill, BsHeart } from "react-icons/bs";
-import { FiPhone, FiMail, FiTag } from "react-icons/fi";
-import { FaMale, FaFemale } from "react-icons/fa";
+import { FiTag, FiPhoneCall } from "react-icons/fi";
+import { IoSend } from "react-icons/io5";
+// import { FaMale, FaFemale } from "react-icons/fa";
 
-import { toggleFavorite } from "../../redux/actions";
-import "./ContactItem.scss";
-
+import { toggleFavorite, deleteContact } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import DeleteModal from "../DeleteModal/DeleteModal";
 import ContactDetailsModal from "../../pages/ContactDetailsModal/ContactDetailsModal";
-import { deleteContact } from "../../redux/actions";
+import ShareContactModal from "../ShareContactModal/ShareContactModal";
+
+import "./ContactItem.scss";
 
 export default function ContactItem() {
   const dispatch = useDispatch();
@@ -20,20 +21,18 @@ export default function ContactItem() {
   const contacts = useSelector((state) => state.contacts);
   const searchTerm = useSelector((state) => state.search).toLowerCase();
   const filterStatus = useSelector((state) => state.filterStatus);
+  const contactStatuss = useSelector((state) => state.contactStatuss);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
 
   const filteredContacts = contacts.filter((contact) => {
-    const matchesSearch = searchTerm
-      ? `${contact.firstName} ${contact.lastName} ${contact.email} ${contact.phone}`
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      : true;
-
+    const matchesSearch = `${contact.firstName} ${contact.lastName} ${contact.email} ${contact.phone}`
+      .toLowerCase()
+      .includes(searchTerm);
     const matchesStatus = filterStatus ? contact.status === filterStatus : true;
-
     return matchesSearch && matchesStatus;
   });
 
@@ -49,28 +48,78 @@ export default function ContactItem() {
               setDetailsVisible(true);
             }}
           >
-            <img
-              className={`contact-avatar rounded-circle border ${contact.gender === "men" ? "border-primary" : "border-danger"}`}
-              src={`https://randomuser.me/api/portraits/${contact.gender === "men" ? "men" : "women"}/${contact.avatar}.jpg`}
-              alt={`${contact.firstName} ${contact.lastName}`}
-            />
+            <div className="avatar-container">
+              <img
+                className={`contact-avatar rounded-circle border ${
+                  contact.gender === "men" ? "border-primary" : "border-danger"
+                }`}
+                src={`https://randomuser.me/api/portraits/${
+                  contact.gender === "men" ? "men" : "women"
+                }/${contact.avatar}.jpg`}
+                alt={`${contact.firstName} ${contact.lastName}`}
+              />
+              <span
+                className="favorite-icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch(toggleFavorite(contact.id));
+                }}
+              >
+                {contact.favorite ? (
+                  <BsHeartFill color="red" size={20} />
+                ) : (
+                  <BsHeart size={20} />
+                )}
+              </span>
+            </div>
 
             <div className="contact-info">
               <h3 className="contact-name">
                 {contact.firstName} {contact.lastName}
               </h3>
-              <p>
-                <FiPhone /> {contact.phone}
-              </p>
-              <p>
-                <FiMail /> {contact.email}
-              </p>
+              <p>{contact.email}</p>
+              <p>{contact.phone}</p>
+
               <p>
                 <FiTag />{" "}
-                <span className={`status-badge status-${contact.status}`}>
+                <span
+                  className={`status-badge status-${contact.status}`}
+                  style={{
+                    backgroundColor: contactStatuss[contact.status]?.bg,
+                    color: contactStatuss[contact.status]?.color,
+                    padding: "4px 8px",
+                    borderRadius: "6px",
+                    fontWeight: "bold",
+                  }}
+                >
                   {contact.status.toUpperCase()}
                 </span>
               </p>
+
+              <div className="contact-actions-top">
+                <button
+                  className="icon-btn phone-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(`tel:${contact.phone}`, "_self");
+                  }}
+                >
+                  <FiPhoneCall size={20} />
+                </button>
+                <button
+                  className="icon-btn message-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log("Відкриваємо модалку для контакту:", contact);
+                    setSelectedContact(contact);
+                    setShareOpen(true);
+                  }}
+                >
+                  <IoSend size={20} className="send-icon" />
+                </button>
+              </div>
+
+              {/* 
               <p>
                 {contact.gender === "men" ? (
                   <FaMale color="#2e7d32" size={20} />
@@ -79,16 +128,7 @@ export default function ContactItem() {
                 )}{" "}
                 <b>{contact.gender.toUpperCase()}</b>
               </p>
-              <p
-                onClick={(e) => {
-                  e.stopPropagation();
-                  dispatch(toggleFavorite(contact.id));
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                Favorite:{" "}
-                {contact.favorite ? <BsHeartFill color="red" /> : <BsHeart />}
-              </p>
+              */}
             </div>
 
             <div className="contact-actions">
@@ -139,6 +179,14 @@ export default function ContactItem() {
             setDetailsVisible(false);
             setSelectedContact(null);
           }}
+        />
+      )}
+
+      {shareOpen && selectedContact && (
+        <ShareContactModal
+          isOpen={shareOpen}
+          onClose={() => setShareOpen(false)}
+          contact={selectedContact}
         />
       )}
     </>

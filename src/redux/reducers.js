@@ -184,8 +184,18 @@ const reducer = (state = intialState, action) => {
     case ADD_NEW_STATUS:
       const newStatusName = Object.keys(action.payload)[0];
       if (state.contactStatuss[newStatusName]) {
-        return state;
+        return {
+          ...state,
+          contactStatuss: {
+            ...state.contactStatuss,
+            [newStatusName]: {
+              ...state.contactStatuss[newStatusName],
+              ...action.payload[newStatusName],
+            },
+          },
+        };
       }
+      
       return {
         ...state,
         contactStatuss: {

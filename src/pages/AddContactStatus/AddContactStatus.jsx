@@ -8,17 +8,25 @@ export default function AddContactStatus() {
   const dispatch = useDispatch();
 
   const [statusName, setStatusName] = useState("");
-  const [color, setColor] = useState("#000000");
+  const [bgColor, setBgColor] = useState("#c8e6c9"); 
+  const [textColor, setTextColor] = useState("#1b5e20"); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addStatus(statusName.trim(), color));
+    if (statusName.trim()) {
+      dispatch(
+        addStatus(statusName.trim(), {
+          bg: bgColor,
+          color: textColor,
+        })
+      );
 
-    setStatusName("");
-    setColor("#000000");
-
-    navigate("/contact-statuss");
+      setStatusName("");
+      setBgColor("#c8e6c9");
+      setTextColor("#1b5e20");
+      navigate("/contact-statuss");
+    }
   };
 
   return (
@@ -49,13 +57,24 @@ export default function AddContactStatus() {
           />
         </div>
         <div className="mb-3 d-flex align-items-center">
-          <label htmlFor="color">Color</label>
+          <label htmlFor="bgColor">Background color</label>
           <input
             type="color"
             className="ms-3 mt-1 fs-5"
-            id="color"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
+            id="bgColor"
+            value={bgColor}
+            onChange={(e) => setBgColor(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-4 d-flex align-items-center">
+          <label htmlFor="textColor">Text color</label>
+          <input
+            type="color"
+            className="ms-3 mt-1 fs-5"
+            id="textColor"
+            value={textColor}
+            onChange={(e) => setTextColor(e.target.value)}
             required
           />
         </div>

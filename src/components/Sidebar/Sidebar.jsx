@@ -44,9 +44,16 @@ export default function Sidebar({ stor }) {
               onClick={() => handleFilter(status)}
               style={{ cursor: "pointer" }}
             >
-              <span className={`status-badge status-${status}`}>
-                {status.charAt(0).toUpperCase() + status.slice(1)}
-              </span>
+              <span
+  className={`status-badge status-${status}`}
+  style={{
+    backgroundColor: contactStatuss[status]?.bg,
+    color: contactStatuss[status]?.color,
+  }}
+>
+  {status.charAt(0).toUpperCase() + status.slice(1)}
+</span>
+
               <span>{count}</span>
             </div>
           ))}

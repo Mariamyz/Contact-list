@@ -1,0 +1,64 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #111; 
+  padding: 25px 35px;
+  border-radius: 15px;
+  text-align: center;
+  color: #2e7d32;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.share-icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.share-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.share-icon.viber { color: #7360f2; }
+.share-icon.telegram { color: #0088cc; }
+.share-icon.email { color: #ff8c00; }
+.share-icon.instagram { color: #e1306c; }
+
+.share-icon:hover {
+  transform: scale(1.2);
+}
+
+.close-btn {
+  background: transparent;
+  border: 1px solid  #2e7d32;
+  padding: 5px 20px;
+  border-radius: 8px;
+  color:  #2e7d32;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  background: #2e7d32;
+  color: #fff;
+}

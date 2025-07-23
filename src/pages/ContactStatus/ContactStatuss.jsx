@@ -70,20 +70,22 @@ export default function ContactStatuss() {
 
                   <td
                     className={`fs-4 fw-bold status-name-${status.toLowerCase()}`}
+                    style={{ color: statusCounts[status].color }}
                   >
                     {status.charAt(0).toUpperCase() + status.slice(1)}
                   </td>
 
                   <td
                     className={`fs-4 fw-bold status-color-${status.toLowerCase()}`}
-                    style={{ backgroundColor: statusCounts[status].bg }}
+                    style={{
+                      backgroundColor: statusCounts[status].bg,
+                      color: statusCounts[status].color,
+                    }}
                   >
                     {statusCounts[status].bg}
                   </td>
 
-                  <td
-                    className={`fs-4 fw-bold status-count-${status.toLowerCase()}`}
-                  >
+                  <td className="fs-4 fw-bold">
                     {statusCounts[status].count}
                   </td>
 

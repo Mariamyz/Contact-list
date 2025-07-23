@@ -52,15 +52,17 @@ export const toggleFavorite = (id) => {
   };
 };
 
-export const addStatus = (name, color) => ({
+export const addStatus = (name, { bg, color }) => ({
   type: ADD_NEW_STATUS,
   payload: {
     [name.toLowerCase()]: {
       count: 0,
-      bg: color,
+      bg,
+      color,
     },
   },
 });
+
 
 export const deleteStatus = (status) => {
   return {
