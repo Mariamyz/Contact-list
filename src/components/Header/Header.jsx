@@ -8,10 +8,10 @@ export default function Header() {
   const dispatch = useDispatch();
 
   return (
-    <header className="container rounded shadow-lg bg-white mb-3 mt-3">
+    <header className="container rounded shadow-lg custom-header mb-3 mt-3">
       <div className="row">
         <div className="col-12">
-          <nav className="navbar bg-body-tertiary">
+        <nav className="navbar custom-navbar">
             <div className="container-fluid">
               <div className="d-flex align-items-center">
                 <NavLink

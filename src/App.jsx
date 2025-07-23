@@ -9,7 +9,6 @@ import Header from "./components/Header/Header";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-// ДОДАНО:
 import ContactStatuss from "./pages/ContactStatus/ContactStatuss";
 import AddContactStatus from "./pages/AddContactStatus/AddContactStatus";
 import EditContactStatus from "./pages/EditContactStatus/EditContactStatus";
