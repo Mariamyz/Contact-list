@@ -20,8 +20,8 @@ export default function AddContact() {
     lastName: "",
     phone: "",
     email: "",
-    viber: "", // <--- додано
-    telegram: "", // <--- додано
+    viber: "", 
+    telegram: "", 
     avatar: "",
     gender: "",
     status: "",
@@ -114,7 +114,7 @@ export default function AddContact() {
 
                 <div>
                   <label className="icon-label">
-                    <FaViber size={28} color="#665CAC" /> Viber
+                    <FaViber size={28} color="#665CAC" /> 
                   </label>
                   <Field
                     name="viber"
@@ -130,7 +130,7 @@ export default function AddContact() {
 
                 <div>
                   <label className="icon-label">
-                    <FaTelegramPlane size={28} color="#0088cc" /> Telegram
+                    <FaTelegramPlane size={28} color="#0088cc" /> 
                   </label>
                   <Field
                     name="telegram"
