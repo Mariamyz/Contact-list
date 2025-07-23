@@ -84,3 +84,19 @@
 .submit-btn:hover {
   background-color: #a6ef3d;
 }
+
+.icon-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.icon-viber {
+  flex-shrink: 0;
+}
+
+.icon-telegram {
+  flex-shrink: 0;
+}

@@ -85,9 +85,7 @@ export default function ContactStatuss() {
                     {statusCounts[status].bg}
                   </td>
 
-                  <td className="fs-4 fw-bold">
-                    {statusCounts[status].count}
-                  </td>
+                  <td className="fs-4 fw-bold">{statusCounts[status].count}</td>
 
                   <td>
                     <Link to={`/contact-statuss/edit-contact-status/${status}`}>

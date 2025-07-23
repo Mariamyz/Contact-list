@@ -1,4 +1,9 @@
-import { FaViber, FaTelegramPlane, FaEnvelope, FaInstagram } from "react-icons/fa";
+import {
+  FaViber,
+  FaTelegramPlane,
+  FaEnvelope,
+  FaInstagram,
+} from "react-icons/fa";
 import "./ShareContactModal.scss";
 
 export default function ShareContactModal({ isOpen, onClose, contact }) {
@@ -26,11 +31,25 @@ export default function ShareContactModal({ isOpen, onClose, contact }) {
         <h3>Share contact</h3>
         <div className="share-icons">
           <FaViber size={30} className="share-icon viber" onClick={openViber} />
-          <FaTelegramPlane size={30} className="share-icon telegram" onClick={openTelegram} />
-          <FaEnvelope size={30} className="share-icon email" onClick={openEmail} />
-          <FaInstagram size={30} className="share-icon instagram" onClick={openInstagram} />
+          <FaTelegramPlane
+            size={30}
+            className="share-icon telegram"
+            onClick={openTelegram}
+          />
+          <FaEnvelope
+            size={30}
+            className="share-icon email"
+            onClick={openEmail}
+          />
+          <FaInstagram
+            size={30}
+            className="share-icon instagram"
+            onClick={openInstagram}
+          />
         </div>
-        <button onClick={onClose} className="close-btn">Close</button>
+        <button onClick={onClose} className="close-btn">
+          Close
+        </button>
       </div>
     </div>
   );

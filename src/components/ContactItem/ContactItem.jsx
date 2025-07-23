@@ -29,9 +29,10 @@ export default function ContactItem() {
   const [selectedContact, setSelectedContact] = useState(null);
 
   const filteredContacts = contacts.filter((contact) => {
-    const matchesSearch = `${contact.firstName} ${contact.lastName} ${contact.email} ${contact.phone}`
-      .toLowerCase()
-      .includes(searchTerm);
+    const matchesSearch =
+      `${contact.firstName} ${contact.lastName} ${contact.email} ${contact.phone}`
+        .toLowerCase()
+        .includes(searchTerm);
     const matchesStatus = filterStatus ? contact.status === filterStatus : true;
     return matchesSearch && matchesStatus;
   });

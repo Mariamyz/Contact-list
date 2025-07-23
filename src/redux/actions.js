@@ -63,7 +63,6 @@ export const addStatus = (name, { bg, color }) => ({
   },
 });
 
-
 export const deleteStatus = (status) => {
   return {
     type: DELETE_STATUS,

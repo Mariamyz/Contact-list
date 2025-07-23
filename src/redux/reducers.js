@@ -195,7 +195,7 @@ const reducer = (state = intialState, action) => {
           },
         };
       }
-      
+
       return {
         ...state,
         contactStatuss: {

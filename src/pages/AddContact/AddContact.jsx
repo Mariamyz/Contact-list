@@ -5,13 +5,14 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router";
 import { IMaskInput } from "react-imask";
 import { BsHeart, BsHeartFill, BsTelephone } from "react-icons/bs";
+import { FaViber, FaTelegramPlane } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/actions";
 
 export default function AddContact() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const contactStatuss = useSelector((state) => state.contactStatuss); 
+  const contactStatuss = useSelector((state) => state.contactStatuss);
 
   const initialValues = {
     id: uuidv4(),
@@ -19,6 +20,8 @@ export default function AddContact() {
     lastName: "",
     phone: "",
     email: "",
+    viber: "", // <--- додано
+    telegram: "", // <--- додано
     avatar: "",
     gender: "",
     status: "",
@@ -110,6 +113,38 @@ export default function AddContact() {
                 </div>
 
                 <div>
+                  <label className="icon-label">
+                    <FaViber size={28} color="#665CAC" /> Viber
+                  </label>
+                  <Field
+                    name="viber"
+                    className="form-control"
+                    placeholder="+38 (0XX) XXX-XX-XX"
+                  />
+                  <ErrorMessage
+                    name="viber"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+
+                <div>
+                  <label className="icon-label">
+                    <FaTelegramPlane size={28} color="#0088cc" /> Telegram
+                  </label>
+                  <Field
+                    name="telegram"
+                    className="form-control"
+                    placeholder="@username"
+                  />
+                  <ErrorMessage
+                    name="telegram"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+
+                <div>
                   <label>Avatar</label>
                   <Field
                     name="avatar"
@@ -146,10 +181,7 @@ export default function AddContact() {
                       <option
                         key={key}
                         value={key}
-                        style={{
-                          backgroundColor: data.bg,
-                          color: "#fff",
-                        }}
+                        style={{ backgroundColor: data.bg, color: "#fff" }}
                       >
                         {key.charAt(0).toUpperCase() + key.slice(1)}
                       </option>

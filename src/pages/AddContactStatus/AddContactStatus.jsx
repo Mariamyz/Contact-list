@@ -8,8 +8,8 @@ export default function AddContactStatus() {
   const dispatch = useDispatch();
 
   const [statusName, setStatusName] = useState("");
-  const [bgColor, setBgColor] = useState("#c8e6c9"); 
-  const [textColor, setTextColor] = useState("#1b5e20"); 
+  const [bgColor, setBgColor] = useState("#c8e6c9");
+  const [textColor, setTextColor] = useState("#1b5e20");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ export default function AddContactStatus() {
         addStatus(statusName.trim(), {
           bg: bgColor,
           color: textColor,
-        })
+        }),
       );
 
       setStatusName("");
